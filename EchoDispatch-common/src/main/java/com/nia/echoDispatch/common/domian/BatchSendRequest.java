@@ -1,4 +1,4 @@
-package com.nia.echoDispatch.domain;
+package com.nia.echoDispatch.common.domian;
 
 import java.util.List;
 

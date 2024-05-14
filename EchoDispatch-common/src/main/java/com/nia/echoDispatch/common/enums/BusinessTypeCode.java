@@ -1,4 +1,4 @@
-package com.nia.echoDispatch.enums;
+package com.nia.echoDispatch.common.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

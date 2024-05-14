@@ -1,7 +1,7 @@
 package com.nia.echoDispatch.service;
 
-import com.nia.echoDispatch.domain.SendRequest;
-import com.nia.echoDispatch.domain.SendResponse;
+import com.nia.echoDispatch.common.domian.SendRequest;
+import com.nia.echoDispatch.common.domian.SendResponse;
 
 public interface RecallService {
 
