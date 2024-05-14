@@ -1,16 +1,19 @@
 package com.nia.echoDispatch.common.pipeline;
 
 
-import com.nia.echoDispatch.common.domian.SendRequest;
+import com.nia.echoDispatch.common.vo.BaseResultVO;
+import com.nia.echoDispatch.common.domian.SendRequester;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Accessors(chain = true)
 public class ProcessContext {
 
     /**
@@ -20,7 +23,7 @@ public class ProcessContext {
     /**
      * 存储上下文数据
      */
-    private SendRequest sendRequest;
+    private SendRequester sendRequest;
     /**
      * 责任链中断标识
      */
@@ -28,7 +31,7 @@ public class ProcessContext {
     /**
      * 返回结果
      */
-    private String result;
+    private BaseResultVO result;
 
 
 }
