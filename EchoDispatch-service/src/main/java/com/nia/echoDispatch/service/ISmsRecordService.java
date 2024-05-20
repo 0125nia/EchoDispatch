@@ -1,4 +1,4 @@
-package com.nia.echoDispatch.web.service;
+package com.nia.echoDispatch.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.nia.echoDispatch.support.domain.SmsRecord;

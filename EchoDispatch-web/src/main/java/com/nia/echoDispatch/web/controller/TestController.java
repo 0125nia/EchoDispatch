@@ -3,7 +3,7 @@ package com.nia.echoDispatch.web.controller;
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.nia.echoDispatch.support.domain.MessageTemplate;
-import com.nia.echoDispatch.web.service.impl.MessageTemplateService;
+import com.nia.echoDispatch.service.impl.MessageTemplateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

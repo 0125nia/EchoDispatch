@@ -22,7 +22,7 @@ public class MessageTemplate {
      * 自增id
      */
     @TableId(type = IdType.AUTO)
-    private int id;
+    private Long id;
 
     /**
      * 模板标题

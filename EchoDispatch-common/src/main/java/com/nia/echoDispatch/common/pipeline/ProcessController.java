@@ -14,21 +14,21 @@ public class ProcessController {
      */
     private Map<String, ProcessTemplate> templateMap = null;
 
-    public void process(ProcessContext context){
+    public void process(ProcessContext context) {
         ProcessTemplate processTemplate = templateMap.get(context.getType());
         List<Processor> processorList = processTemplate.getProcessorList();
         for (Processor processor : processorList) {
             processor.process(context);
-            if (context.isBreakFlag()){
+            if (context.isBreakFlag()) {
                 break;
             }
         }
     }
 
-    public boolean addTemplate(String type,ProcessTemplate processTemplate){
+    public boolean addTemplate(String type, ProcessTemplate processTemplate) {
         try {
-            templateMap.put(type,processTemplate);
-        }catch (Exception e){
+            templateMap.put(type, processTemplate);
+        } catch (Exception e) {
             return false;
         }
         return true;

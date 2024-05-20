@@ -1,10 +1,10 @@
-package com.nia.echoDispatch.web.service.impl;
+package com.nia.echoDispatch.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.nia.echoDispatch.service.ISmsRecordService;
 import com.nia.echoDispatch.support.domain.SmsRecord;
 import com.nia.echoDispatch.support.mapper.SmsRecordMapper;
-import com.nia.echoDispatch.web.service.ISmsRecordService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

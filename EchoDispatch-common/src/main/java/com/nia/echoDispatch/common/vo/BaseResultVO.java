@@ -59,6 +59,16 @@ public class BaseResultVO<T> {
     }
 
     /**
+     * 预设状态的响应
+     * @param status - 状态
+     * @return 预设状态的响应
+     */
+    public static  BaseResultVO resp(RespStatus status) {
+        return new BaseResultVO<>(status);
+    }
+
+
+    /**
      * @return 默认成功响应
      */
     public static BaseResultVO<Void> success() {
@@ -72,6 +82,14 @@ public class BaseResultVO<T> {
     public static <T> BaseResultVO<T> fail() {
         return resp(RespStatus.FAIL, RespStatus.FAIL.getMsg());
     }
+
+    /**
+     * 预设失败响应
+     */
+    public static BaseResultVO fail(RespStatus status) {
+        return resp(status);
+    }
+
 
     /**
      * 自定义类型失败响应
