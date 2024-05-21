@@ -1,6 +1,25 @@
 spring:
+  profiles:
+    active: dev
+  application:
+    name: echoDispatch
   datasource:
-    url: jdbc:mysql://localhost:3306/echo_dispatch?useSSL=false
-    username: root
-    password: 1234
+    url: jdbc:mysql://${EchoDispatch.database.ip:EchoDispatch-mysql}:${EchoDispatch.database.port:3306}/echo_dispatch?useSSL=false
+    username: ${EchoDispatch.database.username:root}
+    password: ${EchoDispatch.database.password:1234}
     driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 30
+      auto-commit: true
+      pool-name: HikariCP
+      idle-timeout: 3000
+      validation-timeout: 1000
+      connection-timeout: 10000
+#server:
+#  port: 8080
+mybatis-plus:
+  type-aliases-package: com.nia.echoDispatch.support.domain
+  configuration:
+    map-underscore-to-camel-case: true # 开启下划线和驼峰映射
