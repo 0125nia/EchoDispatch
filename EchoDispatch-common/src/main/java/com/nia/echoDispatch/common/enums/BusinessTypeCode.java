@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @AllArgsConstructor
-public enum BusinessTypeCode {
+public enum BusinessTypeCode implements EnumsInterface{
 
     /**
      * 发送消息

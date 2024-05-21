@@ -45,7 +45,9 @@ public class AssemblyParamsProcessor implements Processor {
                 .messageTemplateId(messageTemplate.getId())
                 .taskBusinessId(BusinessUtils.generateTaskBusinessId(messageTemplate))
                 .receiver(receivers)
+                .sendChannel(messageTemplate.getSendChannel())
                 .contentModel(contentModel)
+                .msgType(messageTemplate.getMsgType())
                 .build();
 
         ArrayList<TaskInfo> taskInfos = CollUtil.newArrayList(taskInfo);

@@ -20,7 +20,7 @@ public class RabbitMQServiceImpl implements MQService {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @Value("${EchoDispatch.mq.exchange}")
+    @Value("${EchoDispatch.rabbitmq.exchange}")
     private String exchange;
 
     @Override

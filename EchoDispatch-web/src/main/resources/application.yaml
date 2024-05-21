@@ -43,5 +43,8 @@ mybatis-plus:
 EchoDispatch:
   mq:
     topic: ed-topic
-    exchange: ed-exchange
     pipeline: kafka
+  rabbitmq:
+    exchange: ed-exchange
+    queue: ed-queue
+    key: ed-Key

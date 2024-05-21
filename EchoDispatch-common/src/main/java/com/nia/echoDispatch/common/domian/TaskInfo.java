@@ -39,5 +39,14 @@ public class TaskInfo {
      */
     private ContentModel contentModel;
 
+    /**
+     * 发送渠道
+     */
+    private Integer sendChannel;
+
+    /**
+     * 消息类型
+     */
+    private Integer msgType;
 
 }
