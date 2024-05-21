@@ -44,10 +44,12 @@ public class BaseResultVO<T> {
         this(status.getCode(),msg);
     }
     public BaseResultVO(RespStatus status) {
-        this(status, null);
+        this(status, (String) null);
     }
 
-
+    public BaseResultVO(RespStatus status,T data) {
+        this(status, status.getMsg(), data);
+    }
     /**
      * 自定义状态的响应
      *
@@ -75,6 +77,9 @@ public class BaseResultVO<T> {
         return resp(RespStatus.SUCCESS, RespStatus.SUCCESS.getMsg());
     }
 
+    public static <T>BaseResultVO<T> success(T data){
+        return new BaseResultVO<>(RespStatus.SUCCESS,data);
+    }
 
     /**
      * 默认失败响应

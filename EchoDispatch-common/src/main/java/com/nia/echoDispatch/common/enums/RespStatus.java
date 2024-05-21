@@ -34,7 +34,7 @@ public enum RespStatus {
     TEMPLATE_ID_ERROR("P0002","模板id错误"),
     TASK_INFO_IS_NULL("P0003","任务信息列表为空"),
     ALL_RECEIVER_IS_INVALID("P0004","所有的发送任务中的接收者（电话号码/邮箱）格式均无效，无法发送"),
-
+    MQ_SERVICE_ERROR("P0005","消息队列MQ服务异常"),
 
     ;
 
