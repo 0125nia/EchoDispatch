@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * @author nia
- * @description
+ * @description 消费接收到的消息
  * @Date 2024/5/21
  */
 public interface ConsumeService {
