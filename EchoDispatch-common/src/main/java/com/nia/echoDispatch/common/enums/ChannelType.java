@@ -1,6 +1,8 @@
 package com.nia.echoDispatch.common.enums;
 
 import com.nia.echoDispatch.common.dto.ContentModel;
+import com.nia.echoDispatch.common.dto.impl.EmailContentModel;
+import com.nia.echoDispatch.common.dto.impl.SmsContentModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -18,11 +20,11 @@ public enum ChannelType implements EnumsInterface{
     /**
      * sms(短信)  -- 腾讯云、云片
      */
-    SMS(10, "sms(短信)", "sms",null),
+    SMS(10, "sms(短信)", "sms", SmsContentModel.class),
     /**
      * email(邮件) -- QQ、163邮箱
      */
-    EMAIL(20, "email(邮件)", "email",null),
+    EMAIL(20, "email(邮件)", "email", EmailContentModel.class),
 
     ;
     /**

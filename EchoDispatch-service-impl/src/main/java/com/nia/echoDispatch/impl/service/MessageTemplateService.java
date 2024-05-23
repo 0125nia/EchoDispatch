@@ -1,11 +1,11 @@
-package com.nia.echoDispatch.service.impl;
+package com.nia.echoDispatch.impl.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.nia.echoDispatch.service.IMessageTemplateService;
 import com.nia.echoDispatch.support.domain.MessageTemplate;
 import com.nia.echoDispatch.support.mapper.MessageTemplateMapper;
-import com.nia.echoDispatch.service.IMessageTemplateService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

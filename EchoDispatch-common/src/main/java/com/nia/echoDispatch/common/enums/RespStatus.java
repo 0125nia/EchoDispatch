@@ -20,6 +20,10 @@ public enum RespStatus {
      */
     ERROR("500","服务器未知错误"),
 
+    /**
+     * 请求
+     */
+    REQUEST_ERROR("R0001","请求参数错误"),
 
     /**
      * 响应

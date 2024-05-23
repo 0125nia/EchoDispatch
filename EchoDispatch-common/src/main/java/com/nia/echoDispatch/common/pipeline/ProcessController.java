@@ -14,7 +14,7 @@ public class ProcessController {
      */
     private Map<String, ProcessTemplate> templateMap = null;
 
-    public void process(ProcessContext context) {
+    public ProcessContext process(ProcessContext context) {
         ProcessTemplate processTemplate = templateMap.get(context.getType());
         List<Processor> processorList = processTemplate.getProcessorList();
         for (Processor processor : processorList) {
@@ -23,6 +23,7 @@ public class ProcessController {
                 break;
             }
         }
+        return context;
     }
 
     public boolean addTemplate(String type, ProcessTemplate processTemplate) {

@@ -1,4 +1,4 @@
-package com.nia.serviceImpl.action;
+package com.nia.echoDispatch.impl.action;
 
 import cn.hutool.core.collection.CollUtil;
 import com.nia.echoDispatch.common.domian.MessageParam;
@@ -11,7 +11,7 @@ import com.nia.echoDispatch.common.pipeline.Processor;
 import com.nia.echoDispatch.common.vo.BaseResultVO;
 import com.nia.echoDispatch.support.domain.MessageTemplate;
 import com.nia.echoDispatch.support.mapper.MessageTemplateMapper;
-import com.nia.serviceImpl.utils.BusinessUtils;
+import com.nia.echoDispatch.impl.utils.BusinessUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

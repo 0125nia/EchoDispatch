@@ -1,4 +1,4 @@
-package com.nia.serviceImpl.action;
+package com.nia.echoDispatch.impl.action;
 
 import com.alibaba.fastjson.JSON;
 import com.nia.echoDispatch.common.domian.TaskInfo;

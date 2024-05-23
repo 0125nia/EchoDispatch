@@ -1,4 +1,4 @@
-package com.nia.serviceImpl.utils;
+package com.nia.echoDispatch.impl.utils;
 
 import com.nia.echoDispatch.support.domain.MessageTemplate;
 

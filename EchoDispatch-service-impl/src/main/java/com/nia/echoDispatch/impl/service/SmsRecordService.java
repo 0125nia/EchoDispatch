@@ -1,4 +1,4 @@
-package com.nia.echoDispatch.service.impl;
+package com.nia.echoDispatch.impl.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

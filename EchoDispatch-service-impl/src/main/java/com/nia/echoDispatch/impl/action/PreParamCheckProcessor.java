@@ -1,4 +1,4 @@
-package com.nia.serviceImpl.action;
+package com.nia.echoDispatch.impl.action;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.text.CharSequenceUtil;
