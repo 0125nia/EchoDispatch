@@ -33,6 +33,11 @@ spring:
     port: ${EchoDispatch.rabbitmq.port:5672}
     stream:
       virtual-host: /
+  data:
+    redis:
+      host: ${EchoDispatch.redis.host:EchoDispatch-redis}
+      port: ${EchoDispatch.redis.port:6379}
+      password: ${EchoDispatch.redis.password:redis}
 #server:
 #  port: 8080
 mybatis-plus:
