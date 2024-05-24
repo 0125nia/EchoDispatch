@@ -87,7 +87,7 @@ public class MessageTemplate {
     private String expectPushTime;
 
     /**
-     * 消息内容  {$var} 为占位符
+     * 消息内容  ${var} 为占位符
      */
     private String msgContent;
 

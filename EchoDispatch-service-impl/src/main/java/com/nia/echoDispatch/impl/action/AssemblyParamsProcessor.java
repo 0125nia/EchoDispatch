@@ -1,20 +1,28 @@
 package com.nia.echoDispatch.impl.action;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ReflectUtil;
+import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.nia.echoDispatch.common.domian.MessageParam;
 import com.nia.echoDispatch.common.domian.SendRequester;
 import com.nia.echoDispatch.common.domian.TaskInfo;
 import com.nia.echoDispatch.common.dto.ContentModel;
+import com.nia.echoDispatch.common.enums.ChannelType;
 import com.nia.echoDispatch.common.enums.RespStatus;
 import com.nia.echoDispatch.common.pipeline.ProcessContext;
 import com.nia.echoDispatch.common.pipeline.Processor;
 import com.nia.echoDispatch.common.vo.BaseResultVO;
+import com.nia.echoDispatch.impl.utils.BusinessUtils;
+import com.nia.echoDispatch.impl.utils.PlaceholderUtils;
 import com.nia.echoDispatch.support.domain.MessageTemplate;
 import com.nia.echoDispatch.support.mapper.MessageTemplateMapper;
-import com.nia.echoDispatch.impl.utils.BusinessUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 /**
@@ -27,18 +35,24 @@ public class AssemblyParamsProcessor implements Processor {
 
     @Autowired
     private MessageTemplateMapper messageTemplateMapper;
+
+    /**
+     * 实现拼装参数逻辑
+     *
+     * @param processContext
+     */
     @Override
     public void process(ProcessContext processContext) {
         SendRequester sendRequest = processContext.getSendRequest();
         MessageTemplate messageTemplate = messageTemplateMapper.selectById(sendRequest.getMessageTemplateId());
-        if (messageTemplate == null){
+        if (messageTemplate == null) {
             processContext.setResult(BaseResultVO.fail(RespStatus.TEMPLATE_ID_ERROR));
             processContext.setBreakFlag(true);
             return;
         }
 
         Set<String> receivers = getReceivers(sendRequest.getMessageParamList());
-        ContentModel contentModel = getContentModel(sendRequest.getMessageParamList());
+        ContentModel contentModel = getContentModel(CollUtil.getFirst(sendRequest.getMessageParamList()), messageTemplate);
 
 
         TaskInfo taskInfo = TaskInfo.builder()
@@ -57,15 +71,35 @@ public class AssemblyParamsProcessor implements Processor {
 
     /**
      * 获取内容模板对象
-     * @param messageParamList 信息参数列表
-     * @return 内容模板对象
+     *
+     * @param messageParam    消息参数
+     * @param messageTemplate 消息模板
+     * @return 内容模板
      */
-    private ContentModel getContentModel(List<MessageParam> messageParamList) {
-        for (MessageParam messageParam : messageParamList) {
-            Map<String, String> variables = messageParam.getVariables();
+    private ContentModel getContentModel(MessageParam messageParam, MessageTemplate messageTemplate) {
+        final String FIELD_NAME_URL = "url";
+        // 得到真正的ContentModel 类型
+        Class<? extends ContentModel> contentModelClass = Objects.requireNonNull(getChannelByCode(messageTemplate.getSendChannel())).getContentModelClass();
+        // 得到入参
+        Map<String, String> variables = messageParam.getVariables();
+        // 参数模板
+        JSONObject jsonObject = JSON.parseObject(messageTemplate.getMsgContent());
+        // 通过反射 组装出 contentModel
+
+        Field[] fields = ReflectUtil.getFields(contentModelClass);
+        // new实例
+        ContentModel contentModel = ReflectUtil.newInstance(contentModelClass);
+        // 遍历成员变量
+        for (Field field : fields) {
+            String jsonObjectString = jsonObject.getString(field.getName());
+            if (jsonObjectString.isBlank()||jsonObjectString.isEmpty()){
+                continue;
+            }
+            String result = PlaceholderUtils.replacePlaceHolder(jsonObjectString, variables);
+            Object o = JSONUtil.isTypeJSON(result) ? JSONUtil.toBean(result, field.getType()):result;
+            ReflectUtil.setFieldValue(contentModel,field,o);
         }
-        //TODO 补充反射的方式获取内容模板
-        return null;
+        return contentModel;
     }
 
     /**
@@ -81,4 +115,21 @@ public class AssemblyParamsProcessor implements Processor {
         }
         return receivers;
     }
+
+    /**
+     * 根据code获取对应的ChannelType枚举类
+     *
+     * @param sendChannel channel标识
+     * @return ChannelType枚举类
+     */
+    private static ChannelType getChannelByCode(Integer sendChannel) {
+        for (ChannelType value : ChannelType.values()) {
+            if (Objects.equals(value.getCode(), sendChannel)) {
+                return value;
+            }
+        }
+        return null;
+    }
+
+
 }
