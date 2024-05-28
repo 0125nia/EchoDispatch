@@ -22,12 +22,16 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      retries: 5
     consumer:
-      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
-      value-deserializer: org.apache.kafka.common.serialization.StringSerializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       enable-auto-commit: true
       auto-commit-interval: 1000
       auto-offset-reset: earliest
+      group-id: ed
+    streams:
+      replication-factor: 1
   rabbitmq:
     host: ${EchoDispatch.rabbitmq.ip:EchoDispatch-rabbitmq}
     port: ${EchoDispatch.rabbitmq.port:5672}
@@ -45,11 +49,34 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true # 开启下划线和驼峰映射
 
+# 监控配置
+management:
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  prometheus:
+    metrics:
+      export:
+        pushgateway:
+          enabled: true
+
+
 EchoDispatch:
   mq:
     topic: ed-topic
-    pipeline: kafka
+    pipeline: rabbitMQ
   rabbitmq:
     exchange: ed-exchange
     queue: ed-queue
     key: ed-Key
+  redis:
+    key:
+      deduplication: deduplication.

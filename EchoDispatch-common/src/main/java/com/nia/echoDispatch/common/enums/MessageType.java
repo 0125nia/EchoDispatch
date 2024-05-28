@@ -12,19 +12,19 @@ import lombok.ToString;
 @Getter
 @ToString
 @AllArgsConstructor
-public enum MessageType implements EnumsInterface{
+public enum MessageType{
     /**
      * 通知类消息
      */
-    NOTICE(10, "通知类消息", "notice"),
+    NOTICE(10, "通知类消息"),
     /**
      * 营销类消息
      */
-    MARKETING(20, "营销类消息", "marketing"),
+    MARKETING(20, "营销类消息"),
     /**
      * 验证码消息
      */
-    AUTH_CODE(30, "验证码消息", "auth_code");
+    AUTH_CODE(30, "验证码消息");
 
     /**
      * 编码值
@@ -36,9 +36,4 @@ public enum MessageType implements EnumsInterface{
      */
     private final String description;
 
-
-    /**
-     * 英文标识
-     */
-    private final String abbr;
 }

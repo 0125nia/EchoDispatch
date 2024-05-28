@@ -15,7 +15,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @AllArgsConstructor
-public enum ChannelType implements EnumsInterface{
+public enum ChannelType{
 
     /**
      * sms(短信)  -- 腾讯云、云片

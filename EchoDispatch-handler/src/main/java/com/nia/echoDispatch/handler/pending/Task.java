@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Task implements Runnable{
+
     private TaskInfo taskInfo;
 
     @Override

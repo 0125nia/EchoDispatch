@@ -38,7 +38,7 @@ public class RabbitReceiver {
     ))
     public void consume(Message message) {
         String messageBody = new String(message.getBody());
-        if (StringUtils.isBlank(messageBody)) {
+        if (messageBody.isBlank()) {
             log.error("messageBody:{} is blank",messageBody);
             return;
         }
