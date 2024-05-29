@@ -5,11 +5,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.nia.echoDispatch.handler.Deduplication.DeduplicationService;
 import com.nia.echoDispatch.impl.service.MessageTemplateService;
 import com.nia.echoDispatch.support.domain.MessageTemplate;
+import com.nia.echoDispatch.support.service.NacosService;
 import com.nia.echoDispatch.support.utils.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +26,10 @@ public class TestController {
 
     @Autowired
     private RedisUtils redisUtils;
+
+    @Autowired
+    private NacosService nacosService;
+
 
     @RequestMapping("/test")
     private String test() {
@@ -57,4 +62,11 @@ public class TestController {
         }
         return "need deduplicate";
     }
+
+    @RequestMapping("/nacos")
+    public String nacos(){
+        return nacosService.getProperty("test");
+    }
+
+
 }

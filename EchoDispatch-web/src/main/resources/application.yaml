@@ -49,24 +49,13 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true # 开启下划线和驼峰映射
 
-# 监控配置
-management:
-  endpoint:
-    health:
-      show-details: always
-    metrics:
-      enabled: true
-    prometheus:
-      enabled: true
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  prometheus:
-    metrics:
-      export:
-        pushgateway:
-          enabled: true
+nacos:
+  config:
+    server-addr: ${EchoDispatch.nacos.addr.ip:EchoDispatch-nacos}:${EchoDispatch.nacos.addr.port:8848}
+    username: nacos
+    password: nacos
+    namespace: Echo-Dispatch
+    auto-refresh: true
 
 
 EchoDispatch:
@@ -80,3 +69,7 @@ EchoDispatch:
   redis:
     key:
       deduplication: deduplication.
+  property:
+    name: nacos
+    group: DEFAULT_GROUP
+    data-id: ed

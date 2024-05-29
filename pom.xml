@@ -74,12 +74,6 @@
                 <artifactId>spring-kafka</artifactId>
                 <version>3.0.11</version>
             </dependency>
-            <!--动态线程池-->
-            <dependency>
-                <groupId>io.github.lyh200</groupId>
-                <artifactId>dynamic-tp-spring-boot-starter-apollo</artifactId>
-                <version>1.0.2</version>
-            </dependency>
             <!-- redis -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -97,6 +91,12 @@
                 <groupId>com.sun.mail</groupId>
                 <artifactId>javax.mail</artifactId>
                 <version>1.6.2</version>
+            </dependency>
+            <!--nacos-->
+            <dependency>
+                <groupId>com.alibaba.boot</groupId>
+                <artifactId>nacos-config-spring-boot-starter</artifactId>
+                <version>0.2.12</version>
             </dependency>
 
         </dependencies>
