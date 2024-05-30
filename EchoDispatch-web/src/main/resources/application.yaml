@@ -91,3 +91,5 @@ EchoDispatch:
     name: nacos
     group: DEFAULT_GROUP
     data-id: ed
+  data:
+    path: /

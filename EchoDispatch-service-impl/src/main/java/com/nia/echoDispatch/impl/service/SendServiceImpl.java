@@ -42,6 +42,8 @@ public class SendServiceImpl implements SendService {
 
     @Override
     public SendResponse batchSend(BatchSendRequest batchSendRequest) {
+
+        //todo 完善逻辑
         return null;
     }
 }
