@@ -42,6 +42,24 @@ spring:
       host: ${EchoDispatch.redis.host:EchoDispatch-redis}
       port: ${EchoDispatch.redis.port:6379}
       password: ${EchoDispatch.redis.password:redis}
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: ${EMAIL_USERNAME}
+    password: ${AUTHORIZATION_CODE}
+    default-encoding: UTF-8
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            require: true
+          ssl:
+            enable: true
+
+
 #server:
 #  port: 8080
 mybatis-plus:
