@@ -27,6 +27,7 @@ public class DeduplicationService {
 
     /**
      * 去重：检查5min内是否发送了重复的信息 以及 是否在一天内发送超5条信息
+     *
      * @param code
      * @param receiver
      * @param msg
@@ -37,7 +38,7 @@ public class DeduplicationService {
         String headKey = generateHeadKey(receiver);
         String key = generateTotalKey(receiver, code);
         // 判断是否存在这个键或是否发送消息频繁
-        if (!redisUtils.hasKey(key) &&  judgeFrequent(headKey)) {
+        if (!redisUtils.hasKey(key) && judgeFrequent(headKey)) {
             // 没有查询到此键,加入到redis中
             redisUtils.put(key, msg, BasicConstant.MAX_SEND_A_DAY);
             return true;
@@ -82,6 +83,7 @@ public class DeduplicationService {
 
     /**
      * 生成key前缀
+     *
      * @param receiver 接收者
      * @return 生成的key前缀
      */
