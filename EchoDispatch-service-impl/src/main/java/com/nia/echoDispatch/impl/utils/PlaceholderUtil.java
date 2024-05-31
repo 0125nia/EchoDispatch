@@ -7,7 +7,7 @@ import java.util.Map;
  * @description 占位符替换工具类
  * @Date 2024/5/24
  */
-public class PlaceholderUtils {
+public class PlaceholderUtil {
     /**
      * 前占位符
      */

@@ -1,12 +1,11 @@
 package com.nia.echoDispatch.common.domian;
 
-import com.nia.echoDispatch.common.dto.ContentModel;
+import com.nia.echoDispatch.common.model.ContentModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Map;
 import java.util.Set;
 
 /**

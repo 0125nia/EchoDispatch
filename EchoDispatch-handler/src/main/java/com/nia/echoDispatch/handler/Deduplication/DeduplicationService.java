@@ -1,7 +1,9 @@
 package com.nia.echoDispatch.handler.Deduplication;
 
 import com.nia.echoDispatch.common.constant.BasicConstant;
-import com.nia.echoDispatch.support.utils.RedisUtils;
+import com.nia.echoDispatch.common.enums.TraceStatus;
+import com.nia.echoDispatch.support.utils.LogUtil;
+import com.nia.echoDispatch.support.utils.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +22,7 @@ import java.util.Objects;
 public class DeduplicationService {
 
     @Autowired
-    private RedisUtils redisUtils;
+    private RedisUtil redisUtil;
 
     @Value("${EchoDispatch.redis.key.deduplication}")
     private String HEAD;
@@ -38,9 +40,9 @@ public class DeduplicationService {
         String headKey = generateHeadKey(receiver);
         String key = generateTotalKey(receiver, code);
         // 判断是否存在这个键或是否发送消息频繁
-        if (!redisUtils.hasKey(key) && judgeFrequent(headKey)) {
+        if (!redisUtil.hasKey(key) && judgeFrequent(headKey)) {
             // 没有查询到此键,加入到redis中
-            redisUtils.put(key, msg, BasicConstant.MAX_SEND_A_DAY);
+            redisUtil.put(key, msg, BasicConstant.MAX_SEND_A_DAY);
             return true;
         }
         //重复则返回false
@@ -54,7 +56,7 @@ public class DeduplicationService {
      * @return 是否频繁发送 频繁 则返回false
      */
     private boolean judgeFrequent(String key) {
-        return redisUtils.countKeys(key) <= BasicConstant.MAX_MESSAGE_IN_SET_TIME;
+        return redisUtil.countKeys(key) <= BasicConstant.MAX_MESSAGE_IN_SET_TIME;
     }
 
     /**
@@ -65,7 +67,7 @@ public class DeduplicationService {
      * @return 是否重复，重复返回true
      */
     private boolean judgeDuplicate(String msg, String key) {
-        String message = redisUtils.get(key);
+        String message = redisUtil.get(key);
         return Objects.equals(message, msg);
     }
 
@@ -74,7 +76,7 @@ public class DeduplicationService {
      * 生成redis的key
      *
      * @param receiver 接收者
-     * @param code 消息类型作为key的一部分
+     * @param code     消息类型作为key的一部分
      * @return 生成的key
      */
     public String generateTotalKey(String receiver, String code) {

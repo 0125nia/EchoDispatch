@@ -2,8 +2,6 @@ package com.nia.echoDispatch.support.utils;
 
 import cn.hutool.core.collection.CollUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.Cursor;
-import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  * @Date 2024/5/23
  */
 @Component
-public class RedisUtils {
+public class RedisUtil {
 
     @Autowired
     private StringRedisTemplate redisTemplate;

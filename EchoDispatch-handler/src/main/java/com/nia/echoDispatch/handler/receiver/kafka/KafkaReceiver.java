@@ -2,8 +2,10 @@ package com.nia.echoDispatch.handler.receiver.kafka;
 
 import com.alibaba.fastjson.JSON;
 import com.nia.echoDispatch.common.domian.TaskInfo;
+import com.nia.echoDispatch.common.enums.TraceStatus;
 import com.nia.echoDispatch.handler.receiver.service.ConsumeService;
 import com.nia.echoDispatch.support.constants.MQPipelineConstants;
+import com.nia.echoDispatch.support.utils.LogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,9 @@ public class KafkaReceiver {
         Optional<String> message = Optional.ofNullable(consumerRecord.value());
         if (message.isPresent()){
             List<TaskInfo> taskInfos = JSON.parseArray(message.get(), TaskInfo.class);
+            //记录日志
+            LogUtil.record(TraceStatus.CONSUME,taskInfos);
+            //消费逻辑
             consumeService.consumeSendMsg(taskInfos);
         }else {
             log.error("消息消费错误：topic:{} ,taskInfo:{}",consumerRecord.topic(),consumerRecord.value());

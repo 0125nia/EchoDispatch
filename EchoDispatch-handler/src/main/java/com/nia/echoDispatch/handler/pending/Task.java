@@ -3,11 +3,11 @@ package com.nia.echoDispatch.handler.pending;
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson.JSON;
 import com.nia.echoDispatch.common.domian.TaskInfo;
-import com.nia.echoDispatch.common.enums.ChannelType;
+import com.nia.echoDispatch.common.enums.TraceStatus;
 import com.nia.echoDispatch.handler.Deduplication.DeduplicationService;
 import com.nia.echoDispatch.handler.handler.Handler;
-import com.nia.echoDispatch.handler.utils.EnumsUtils;
-import lombok.AllArgsConstructor;
+import com.nia.echoDispatch.handler.utils.EnumsUtil;
+import com.nia.echoDispatch.support.utils.LogUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,6 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -45,13 +44,19 @@ public class Task implements Runnable{
     @Override
     public void run() {
         //去重逻辑
+        LogUtil.record(TraceStatus.DEDUPLICATION,taskInfo);
         TaskInfo deduplication = deduplication(taskInfo);
 
         if (CollUtil.isEmpty(deduplication.getReceiver())){
+            LogUtil.record(TraceStatus.DEDUPLICATION_ERROR,taskInfo);
             return;
         }
+        //记录日志
+        LogUtil.record(TraceStatus.DEDUPLICATION_SUCCESS,taskInfo);
 
         //发送逻辑
+        //记录日志
+        LogUtil.record(TraceStatus.SEND_TO_CHANNEL,deduplication);
         sendHandler(deduplication);
 
     }
@@ -64,6 +69,7 @@ public class Task implements Runnable{
      */
     private void sendHandler(TaskInfo taskInfo){
         try{
+            //获取handler处理对象
             Handler handler = handlerMap.get(taskInfo.getSendChannel());
             handler.handle(taskInfo);
         }catch (Exception e){
@@ -80,7 +86,7 @@ public class Task implements Runnable{
     private TaskInfo deduplication(TaskInfo taskInfo){
         String msg = JSON.toJSONString(taskInfo.getContentModel());
         Integer sendChannel = taskInfo.getSendChannel();
-        String code = Objects.requireNonNull(EnumsUtils.getChannelTypeByCode(sendChannel)).getAbbrCode();
+        String code = Objects.requireNonNull(EnumsUtil.getChannelTypeByCode(sendChannel)).getAbbrCode();
         //使用流过滤处理接收者Set
         Set<String> receivers = taskInfo.getReceiver().stream()
                 .filter(receiver -> deduplicationService.deduplication(code,receiver,msg))

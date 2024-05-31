@@ -1,4 +1,4 @@
-package com.nia.echoDispatch.common.dto;
+package com.nia.echoDispatch.common.model;
 
 import java.io.Serializable;
 

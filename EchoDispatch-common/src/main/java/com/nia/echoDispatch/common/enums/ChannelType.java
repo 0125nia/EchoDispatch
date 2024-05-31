@@ -1,8 +1,8 @@
 package com.nia.echoDispatch.common.enums;
 
-import com.nia.echoDispatch.common.dto.ContentModel;
-import com.nia.echoDispatch.common.dto.impl.EmailContentModel;
-import com.nia.echoDispatch.common.dto.impl.SmsContentModel;
+import com.nia.echoDispatch.common.model.ContentModel;
+import com.nia.echoDispatch.common.model.impl.EmailContentModel;
+import com.nia.echoDispatch.common.model.impl.SmsContentModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;

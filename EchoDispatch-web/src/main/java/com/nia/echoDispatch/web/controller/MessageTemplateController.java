@@ -48,7 +48,7 @@ public class MessageTemplateController {
     }
 
 
-    @GetMapping("query/{id}")
+    @GetMapping("/query/{id}")
     @ApiOperation("根据id查找消息模板")
     public MessageTemplate queryById(@PathVariable Long id){
         return messageTemplateService.getById(id);
@@ -58,7 +58,7 @@ public class MessageTemplateController {
     /**
      * 上传人群文件
      */
-    @PostMapping("upload")
+    @PostMapping("/upload")
     @ApiOperation("/上传人群文件")
     public Map<Object, Object> upload(@RequestParam("file") MultipartFile file) {
         String filePath = dataPath + IdUtil.fastSimpleUUID() + file.getOriginalFilename();

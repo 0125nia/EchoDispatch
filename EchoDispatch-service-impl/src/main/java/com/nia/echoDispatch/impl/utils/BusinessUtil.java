@@ -7,7 +7,7 @@ import com.nia.echoDispatch.support.domain.MessageTemplate;
  * @description Business工具类
  * @Date 2024/5/20
  */
-public class BusinessUtils {
+public class BusinessUtil {
 
     /**
      * 生成业务唯一标识id  "模板类型 + 模板id + 时间戳"

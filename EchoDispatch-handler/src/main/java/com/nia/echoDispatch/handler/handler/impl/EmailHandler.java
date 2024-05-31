@@ -1,7 +1,7 @@
 package com.nia.echoDispatch.handler.handler.impl;
 
 import com.nia.echoDispatch.common.domian.TaskInfo;
-import com.nia.echoDispatch.common.dto.impl.EmailContentModel;
+import com.nia.echoDispatch.common.model.impl.EmailContentModel;
 import com.nia.echoDispatch.handler.handler.Handler;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

@@ -1,6 +1,6 @@
-package com.nia.echoDispatch.common.dto.impl;
+package com.nia.echoDispatch.common.model.impl;
 
-import com.nia.echoDispatch.common.dto.ContentModel;
+import com.nia.echoDispatch.common.model.ContentModel;
 import lombok.*;
 
 /**

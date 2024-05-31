@@ -25,15 +25,4 @@ public class ProcessController {
         }
         return context;
     }
-
-    public boolean addTemplate(String type, ProcessTemplate processTemplate) {
-        try {
-            templateMap.put(type, processTemplate);
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
-
-
 }

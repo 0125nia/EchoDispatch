@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.nia.echoDispatch.common.domian.TaskInfo;
-import com.nia.echoDispatch.common.dto.impl.EmailContentModel;
+import com.nia.echoDispatch.common.model.impl.EmailContentModel;
 import com.nia.echoDispatch.common.enums.ChannelType;
 import com.nia.echoDispatch.common.enums.MessageType;
 import com.nia.echoDispatch.handler.Deduplication.DeduplicationService;
@@ -12,13 +12,11 @@ import com.nia.echoDispatch.handler.handler.impl.EmailHandler;
 import com.nia.echoDispatch.impl.service.MessageTemplateService;
 import com.nia.echoDispatch.support.domain.MessageTemplate;
 import com.nia.echoDispatch.support.service.NacosService;
-import com.nia.echoDispatch.support.utils.RedisUtils;
+import com.nia.echoDispatch.support.utils.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -32,7 +30,7 @@ public class TestController {
     private DeduplicationService deduplicationService;
 
     @Autowired
-    private RedisUtils redisUtils;
+    private RedisUtil redisUtil;
 
     @Autowired
     private NacosService nacosService;
@@ -56,8 +54,8 @@ public class TestController {
 
     @RequestMapping("/redis")
     public String redis() {
-        redisUtils.put("abc", "111");
-        String s = redisUtils.get("abc");
+        redisUtil.put("abc", "111");
+        String s = redisUtil.get("abc");
         System.out.println(s);
         return s;
     }

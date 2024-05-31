@@ -8,19 +8,18 @@ import com.alibaba.fastjson.JSONObject;
 import com.nia.echoDispatch.common.domian.MessageParam;
 import com.nia.echoDispatch.common.domian.SendRequester;
 import com.nia.echoDispatch.common.domian.TaskInfo;
-import com.nia.echoDispatch.common.dto.ContentModel;
+import com.nia.echoDispatch.common.model.ContentModel;
 import com.nia.echoDispatch.common.enums.ChannelType;
 import com.nia.echoDispatch.common.enums.RespStatus;
 import com.nia.echoDispatch.common.pipeline.ProcessContext;
 import com.nia.echoDispatch.common.pipeline.Processor;
 import com.nia.echoDispatch.common.vo.BaseResultVO;
-import com.nia.echoDispatch.impl.utils.BusinessUtils;
-import com.nia.echoDispatch.impl.utils.PlaceholderUtils;
+import com.nia.echoDispatch.impl.utils.BusinessUtil;
+import com.nia.echoDispatch.impl.utils.PlaceholderUtil;
 import com.nia.echoDispatch.support.domain.MessageTemplate;
 import com.nia.echoDispatch.support.mapper.MessageTemplateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -57,7 +56,7 @@ public class AssemblyParamsProcessor implements Processor {
 
         TaskInfo taskInfo = TaskInfo.builder()
                 .messageTemplateId(messageTemplate.getId())
-                .taskBusinessId(BusinessUtils.generateTaskBusinessId(messageTemplate))
+                .taskBusinessId(BusinessUtil.generateTaskBusinessId(messageTemplate))
                 .receiver(receivers)
                 .sendChannel(messageTemplate.getSendChannel())
                 .contentModel(contentModel)
@@ -95,7 +94,7 @@ public class AssemblyParamsProcessor implements Processor {
             if (jsonObjectString.isBlank()||jsonObjectString.isEmpty()){
                 continue;
             }
-            String result = PlaceholderUtils.replacePlaceHolder(jsonObjectString, variables);
+            String result = PlaceholderUtil.replacePlaceHolder(jsonObjectString, variables);
             Object o = JSONUtil.isTypeJSON(result) ? JSONUtil.toBean(result, field.getType()):result;
             ReflectUtil.setFieldValue(contentModel,field,o);
         }
