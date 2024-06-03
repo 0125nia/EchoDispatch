@@ -1,7 +1,7 @@
 package com.nia.echoDispatch.handler.pending;
 
 import com.nia.echoDispatch.common.enums.ChannelType;
-import com.nia.echoDispatch.handler.pool.ThreadPoolConstants;
+import com.nia.echoDispatch.common.constant.ThreadPoolConstants;
 import com.nia.echoDispatch.support.utils.ThreadPoolUtil;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;

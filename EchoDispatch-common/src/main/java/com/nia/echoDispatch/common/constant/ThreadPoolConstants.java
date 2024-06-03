@@ -1,6 +1,4 @@
-package com.nia.echoDispatch.handler.pool;
-
-import lombok.experimental.FieldNameConstants;
+package com.nia.echoDispatch.common.constant;
 
 /**
  * @author nia

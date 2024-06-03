@@ -14,9 +14,6 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 @Component
 public class ThreadPoolUtil {
-
-    @Value("${EchoDispatch.source-name}")
-    private String SOURCE_NAME;
     @Autowired
     private ThreadPoolExecutorShutdownDefinition shutdownDefinition;
 
