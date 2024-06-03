@@ -1,10 +1,10 @@
 package com.nia.echoDispatch.web.controller;
 
 import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.IdUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
+import com.nia.echoDispatch.common.vo.BaseResultVO;
 import com.nia.echoDispatch.impl.service.MessageTemplateService;
 import com.nia.echoDispatch.support.domain.MessageTemplate;
 import io.swagger.annotations.Api;
@@ -31,6 +31,8 @@ public class MessageTemplateController {
 
     @Autowired
     private MessageTemplateService messageTemplateService;
+
+
 
     @Value("${EchoDispatch.data.path}")
     private String dataPath;
@@ -74,5 +76,24 @@ public class MessageTemplateController {
         }
         return MapUtil.of(new String[][]{{"value", filePath}});
     }
+
+    /**
+     * 启动模板的定时任务
+     */
+    @PostMapping("start/{id}")
+    @ApiOperation("/启动模板的定时任务")
+    public BaseResultVO start(@RequestBody @PathVariable("id") Long id) {
+        return messageTemplateService.startCronTask(id);
+    }
+
+    /**
+     * 暂停模板的定时任务
+     */
+    @PostMapping("stop/{id}")
+    @ApiOperation("/暂停模板的定时任务")
+    public BaseResultVO stop(@RequestBody @PathVariable("id") Long id) {
+        return messageTemplateService.stopCronTask(id);
+    }
+
 
 }

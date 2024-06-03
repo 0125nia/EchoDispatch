@@ -1,4 +1,4 @@
-package com.nia.EchoDispatch.cron.service.impl;
+package com.nia.echoDispatch.cron.service.impl;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.IdUtil;
@@ -7,10 +7,10 @@ import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.nia.EchoDispatch.cron.constant.XxlJobConstants;
-import com.nia.EchoDispatch.cron.domain.XxlJobGroup;
-import com.nia.EchoDispatch.cron.domain.XxlJobInfo;
-import com.nia.EchoDispatch.cron.service.XxlJobService;
+import com.nia.echoDispatch.cron.constant.XxlJobConstants;
+import com.nia.echoDispatch.cron.domain.XxlJobGroup;
+import com.nia.echoDispatch.cron.domain.XxlJobInfo;
+import com.nia.echoDispatch.cron.service.XxlJobService;
 import com.nia.echoDispatch.common.enums.RespStatus;
 import com.nia.echoDispatch.common.vo.BaseResultVO;
 import com.xxl.job.core.biz.model.ReturnT;

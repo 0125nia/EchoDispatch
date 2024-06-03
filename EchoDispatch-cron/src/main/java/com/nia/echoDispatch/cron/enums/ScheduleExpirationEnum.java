@@ -1,4 +1,4 @@
-package com.nia.EchoDispatch.cron.enums;
+package com.nia.echoDispatch.cron.enums;
 
 /**
  * @author nia

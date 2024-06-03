@@ -1,4 +1,4 @@
-package com.nia.EchoDispatch.cron.constant;
+package com.nia.echoDispatch.cron.constant;
 
 /**
  * @author nia

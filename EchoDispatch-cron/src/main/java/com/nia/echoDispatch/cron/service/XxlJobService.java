@@ -1,7 +1,7 @@
-package com.nia.EchoDispatch.cron.service;
+package com.nia.echoDispatch.cron.service;
 
-import com.nia.EchoDispatch.cron.domain.XxlJobGroup;
-import com.nia.EchoDispatch.cron.domain.XxlJobInfo;
+import com.nia.echoDispatch.cron.domain.XxlJobGroup;
+import com.nia.echoDispatch.cron.domain.XxlJobInfo;
 import com.nia.echoDispatch.common.vo.BaseResultVO;
 
 /**

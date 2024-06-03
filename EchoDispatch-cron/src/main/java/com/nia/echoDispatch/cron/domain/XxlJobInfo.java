@@ -1,4 +1,4 @@
-package com.nia.EchoDispatch.cron.domain;
+package com.nia.echoDispatch.cron.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -73,6 +73,7 @@ xxl:
       address: ${EchoDispatch.cron.address}
       logpath: logs/xxl
       logretentiondays: 30
+      jobHandlerName: edJob
 
 #server:
 #  port: 8080

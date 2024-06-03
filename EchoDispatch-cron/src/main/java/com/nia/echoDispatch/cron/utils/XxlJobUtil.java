@@ -1,14 +1,14 @@
-package com.nia.EchoDispatch.cron.utils;
+package com.nia.echoDispatch.cron.utils;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.text.CharSequenceUtil;
-import com.nia.EchoDispatch.cron.constant.XxlJobConstants;
-import com.nia.EchoDispatch.cron.domain.XxlJobGroup;
-import com.nia.EchoDispatch.cron.domain.XxlJobInfo;
-import com.nia.EchoDispatch.cron.enums.ExecutorRouteEnum;
-import com.nia.EchoDispatch.cron.enums.ScheduleExpirationEnum;
-import com.nia.EchoDispatch.cron.enums.ScheduleTypeEnum;
-import com.nia.EchoDispatch.cron.service.XxlJobService;
+import com.nia.echoDispatch.cron.constant.XxlJobConstants;
+import com.nia.echoDispatch.cron.domain.XxlJobGroup;
+import com.nia.echoDispatch.cron.domain.XxlJobInfo;
+import com.nia.echoDispatch.cron.enums.ExecutorRouteEnum;
+import com.nia.echoDispatch.cron.enums.ScheduleExpirationEnum;
+import com.nia.echoDispatch.cron.enums.ScheduleTypeEnum;
+import com.nia.echoDispatch.cron.service.XxlJobService;
 import com.nia.echoDispatch.common.constant.BasicConstant;
 import com.nia.echoDispatch.common.enums.RespStatus;
 import com.nia.echoDispatch.common.vo.BaseResultVO;
