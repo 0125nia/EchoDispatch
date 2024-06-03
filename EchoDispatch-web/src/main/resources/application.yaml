@@ -59,6 +59,20 @@ spring:
           ssl:
             enable: true
 
+xxl:
+  job:
+    accessToken: default_token
+    admin:
+      addresses: http://${EchoDispatch.cron.admin.addresses:EchoDispatch-xxl-job}:6767/xxl-job-admin
+      username: admin
+      password: admin
+    executor:
+      appname: ed
+      port: 9999
+      ip: ${EchoDispatch.cron.ip}
+      address: ${EchoDispatch.cron.address}
+      logpath: logs/xxl
+      logretentiondays: 30
 
 #server:
 #  port: 8080
@@ -77,6 +91,8 @@ nacos:
 
 
 EchoDispatch:
+  xxl-job:
+    enabled: true
   mq:
     topic: ed-topic
     pipeline: rabbitMQ

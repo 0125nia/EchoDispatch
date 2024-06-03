@@ -14,7 +14,6 @@
         <module>EchoDispatch-handler</module>
         <module>EchoDispatch-service</module>
         <module>EchoDispatch-service-impl</module>
-        <module>EchoDispatch-stream</module>
         <module>EchoDispatch-web</module>
         <module>EchoDispatch-midSupports</module>
     </modules>
@@ -98,7 +97,12 @@
                 <artifactId>logback-gelf</artifactId>
                 <version>3.0.0</version>
             </dependency>
-
+            <!--xxl-job-->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>2.4.0</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

@@ -40,6 +40,19 @@ public enum RespStatus {
     ALL_RECEIVER_IS_INVALID("P0004","所有的发送任务中的接收者（电话号码/邮箱）格式均无效，无法发送"),
     MQ_SERVICE_ERROR("P0005","消息队列MQ服务异常"),
 
+
+    /**
+     * XXL-job
+     */
+    XXL_JOB_SAVE_ERROR("X0001","xxl-job定时任务修改/新增错误"),
+    XXL_JOB_DELETE_ERROR("X0002","xxl-job定时任务移除错误"),
+    XXL_JOB_START_ERROR("X0003","xxl-job定时任务开启错误"),
+    XXL_JOB_STOP_ERROR("X0004","xxl-job定时任务停止错误"),
+    XXL_JOB_GET_GROUP_ID("X0005","xxl-job定时任务获取执行器错误"),
+    XXL_JOB_CREATE_GROUP("X0006","xxl-job定时任务新增执行器错误"),
+
+
+
     ;
 
     private final String code;
