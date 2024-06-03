@@ -92,6 +92,7 @@ nacos:
 
 
 EchoDispatch:
+  source-name: ed
   xxl-job:
     enabled: true
   mq:

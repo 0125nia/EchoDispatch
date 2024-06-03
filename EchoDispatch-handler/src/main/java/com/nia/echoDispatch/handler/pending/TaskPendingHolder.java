@@ -2,7 +2,9 @@ package com.nia.echoDispatch.handler.pending;
 
 import com.nia.echoDispatch.common.enums.ChannelType;
 import com.nia.echoDispatch.handler.pool.ThreadPoolConstants;
+import com.nia.echoDispatch.support.utils.ThreadPoolUtil;
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -23,6 +25,8 @@ public class TaskPendingHolder {
      * 存储线程池与消息类型的映射
      */
     private Map<String, ThreadPoolExecutor> holder = new HashMap<>(32);
+    @Autowired
+    private ThreadPoolUtil threadPoolUtils;
 
     /**
      * 给每个渠道，每种类型初始化一个线程池
@@ -31,6 +35,8 @@ public class TaskPendingHolder {
     public void init(){
         for (ChannelType channelType : ChannelType.values()) {
             ThreadPoolExecutor executor = newPool();
+            //注册线程池
+            threadPoolUtils.register(executor);
             holder.put(channelType.getAbbrCode(),executor);
         }
     }
