@@ -23,7 +23,7 @@
         </dependency>
         <dependency>
             <groupId>com.nia</groupId>
-            <artifactId>EchoDispatch-service-impl</artifactId>
+            <artifactId>EchoDispatch-midSupports</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

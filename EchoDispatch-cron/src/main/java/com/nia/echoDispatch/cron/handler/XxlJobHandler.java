@@ -2,8 +2,8 @@ package com.nia.echoDispatch.cron.handler;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.nia.echoDispatch.cron.config.XxlJobThreadPoolConfig;
-import com.nia.echoDispatch.impl.service.MessageTemplateService;
 import com.nia.echoDispatch.support.domain.MessageTemplate;
+import com.nia.echoDispatch.support.mapper.MessageTemplateMapper;
 import com.nia.echoDispatch.support.utils.ThreadPoolUtil;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
@@ -23,7 +23,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Slf4j
 public class XxlJobHandler {
     @Autowired
-    private MessageTemplateService messageTemplateService;
+    private MessageTemplateMapper messageTemplateMapper;
     @Autowired
     private ThreadPoolUtil threadPoolUtil;
     private ThreadPoolExecutor threadPoolExecutor = XxlJobThreadPoolConfig.getThreadPoolExecutor();
@@ -42,7 +42,7 @@ public class XxlJobHandler {
     }
 
     private void handle(Long messageTemplateId) {
-        MessageTemplate messageTemplate = messageTemplateService.getById(messageTemplateId);
+        MessageTemplate messageTemplate = messageTemplateMapper.selectById(messageTemplateId);
         if (Objects.isNull(messageTemplate)) {
             return;
         }
@@ -50,7 +50,8 @@ public class XxlJobHandler {
             log.error("TaskHandler#handle crowdPath empty! messageTemplateId:{}", messageTemplateId);
             return;
         }
-        //todo完善后续逻辑
+
+        //todo
 
     }
 
