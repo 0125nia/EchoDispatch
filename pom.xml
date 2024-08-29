@@ -103,6 +103,12 @@
                 <artifactId>xxl-job-core</artifactId>
                 <version>2.4.0</version>
             </dependency>
+            <!--动态线程池引入-->
+            <dependency>
+                <groupId>io.github.lyh200</groupId>
+                <artifactId>dynamic-tp-spring-boot-starter-apollo</artifactId>
+                <version>1.0.2</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

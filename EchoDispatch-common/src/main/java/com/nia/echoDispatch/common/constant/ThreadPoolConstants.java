@@ -23,6 +23,10 @@ public class ThreadPoolConstants {
      * 工作队列大小
      */
     public static final Integer WORK_QUEUE_SIZE = 128;
+    /**
+     * 大任务队列大小
+     */
+    public static final Integer BIG_QUEUE_SIZE = 1024;
 
 
 }

@@ -9,6 +9,8 @@ import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -29,7 +31,7 @@ public class ThreadPoolExecutorShutdownDefinition implements ApplicationListener
      * 时间单位(s)
      */
     private static final TimeUnit TIME_UNIT = TimeUnit.SECONDS;
-    private final List<ThreadPoolExecutor> POOLS = Collections.synchronizedList(new ArrayList<>(12));
+    private final List<ExecutorService> POOLS = Collections.synchronizedList(new ArrayList<>(12));
 
 
     @Override
@@ -38,7 +40,7 @@ public class ThreadPoolExecutorShutdownDefinition implements ApplicationListener
         if (CollectionUtils.isEmpty(POOLS)) {
             return;
         }
-        for (ThreadPoolExecutor pool : POOLS) {
+        for (ExecutorService pool : POOLS) {
             pool.shutdown();
             try {
                 if (!pool.awaitTermination(AWAIT_TERMINATION, TIME_UNIT)) {
@@ -53,9 +55,9 @@ public class ThreadPoolExecutorShutdownDefinition implements ApplicationListener
 
     /**
      * 注册线程池
-     * @param threadPoolExecutor
+     * @param executor
      */
-    public void registryExecutor(ThreadPoolExecutor threadPoolExecutor) {
-        POOLS.add(threadPoolExecutor);
+    public void registryExecutor(ExecutorService executor) {
+        POOLS.add(executor);
     }
 }

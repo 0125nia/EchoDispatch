@@ -32,8 +32,6 @@ public class MessageTemplateController {
     @Autowired
     private MessageTemplateService messageTemplateService;
 
-
-
     @Value("${EchoDispatch.data.path}")
     private String dataPath;
 

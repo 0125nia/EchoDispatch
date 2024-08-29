@@ -1,6 +1,7 @@
 package com.nia.echoDispatch.cron.handler;
 
 import cn.hutool.core.text.CharSequenceUtil;
+import com.dtp.core.thread.DtpExecutor;
 import com.nia.echoDispatch.cron.config.XxlJobThreadPoolConfig;
 import com.nia.echoDispatch.support.domain.MessageTemplate;
 import com.nia.echoDispatch.support.mapper.MessageTemplateMapper;
@@ -26,7 +27,7 @@ public class XxlJobHandler {
     private MessageTemplateMapper messageTemplateMapper;
     @Autowired
     private ThreadPoolUtil threadPoolUtil;
-    private ThreadPoolExecutor threadPoolExecutor = XxlJobThreadPoolConfig.getThreadPoolExecutor();
+    private DtpExecutor dtpExecutor = XxlJobThreadPoolConfig.getThreadPoolExecutor();
 
     /**
      * 处理后台的 austin 定时任务消息
@@ -34,10 +35,10 @@ public class XxlJobHandler {
     @XxlJob("edJob")
     public void execute() {
         log.info("CronTaskHandler#execute messageTemplateId:{} cron exec!", XxlJobHelper.getJobParam());
-        threadPoolUtil.register(threadPoolExecutor);
+        threadPoolUtil.register(dtpExecutor);
 
         Long messageTemplateId = Long.valueOf(XxlJobHelper.getJobParam());
-        threadPoolExecutor.execute(() -> handle(messageTemplateId));
+        dtpExecutor.execute(() -> handle(messageTemplateId));
 
     }
 
@@ -51,7 +52,6 @@ public class XxlJobHandler {
             return;
         }
 
-        //todo
 
     }
 

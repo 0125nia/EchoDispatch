@@ -1,13 +1,16 @@
 package com.nia.echoDispatch.handler.pending;
 
+import com.dtp.core.thread.DtpExecutor;
 import com.nia.echoDispatch.common.enums.ChannelType;
 import com.nia.echoDispatch.common.constant.ThreadPoolConstants;
+import com.nia.echoDispatch.handler.config.HandlerThreadPoolConfig;
 import com.nia.echoDispatch.support.utils.ThreadPoolUtil;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -20,6 +23,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class TaskPendingHolder {
+
 
     /**
      * 存储线程池与消息类型的映射
@@ -34,24 +38,13 @@ public class TaskPendingHolder {
     @PostConstruct
     public void init(){
         for (ChannelType channelType : ChannelType.values()) {
-            ThreadPoolExecutor executor = newPool();
+            DtpExecutor executor = HandlerThreadPoolConfig.getExecutor(channelType.getAbbrCode());
             //注册线程池
             threadPoolUtils.register(executor);
             holder.put(channelType.getAbbrCode(),executor);
         }
     }
 
-
-    public static ThreadPoolExecutor newPool(){
-        return new ThreadPoolExecutor(
-                ThreadPoolConstants.CORE_POOL_SIZE,
-                ThreadPoolConstants.MAX_POOL_SIZE,
-                ThreadPoolConstants.KEEP_ALIVE_TIME,
-                TimeUnit.SECONDS,
-                new LinkedBlockingDeque<>(ThreadPoolConstants.WORK_QUEUE_SIZE),
-                new ThreadPoolExecutor.AbortPolicy()
-                );
-    }
 
     public void pendingAndExecute(String code,Task task) {
         holder.get(code).execute(task);
