@@ -110,6 +110,13 @@
                 <version>1.0.2</version>
             </dependency>
 
+            <!--注解打印日志-->
+            <dependency>
+                <groupId>cn.monitor4all</groupId>
+                <artifactId>log-record-starter</artifactId>
+                <version>1.0.4.1</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

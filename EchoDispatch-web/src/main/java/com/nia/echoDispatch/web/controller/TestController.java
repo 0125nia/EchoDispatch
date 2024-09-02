@@ -7,6 +7,7 @@ import com.nia.echoDispatch.common.domian.TaskInfo;
 import com.nia.echoDispatch.common.model.impl.EmailContentModel;
 import com.nia.echoDispatch.common.enums.ChannelType;
 import com.nia.echoDispatch.common.enums.MessageType;
+import com.nia.echoDispatch.handler.Deduplication.DeduplicationParam;
 import com.nia.echoDispatch.handler.Deduplication.DeduplicationService;
 import com.nia.echoDispatch.handler.handler.impl.EmailHandler;
 import com.nia.echoDispatch.impl.service.MessageTemplateService;
@@ -26,8 +27,6 @@ public class TestController {
     @Autowired
     private MessageTemplateService messageTemplateService;
 
-    @Autowired
-    private DeduplicationService deduplicationService;
 
     @Autowired
     private RedisUtil redisUtil;
@@ -58,17 +57,6 @@ public class TestController {
         String s = redisUtil.get("abc");
         System.out.println(s);
         return s;
-    }
-
-    @RequestMapping("/deduplicate")
-    public String deduplicate() {
-        boolean b = deduplicationService.deduplication("sms.notice", "nia", "12343");
-        System.out.println(b);
-
-        if (b) {
-            return "ok";
-        }
-        return "need deduplicate";
     }
 
     @RequestMapping("/nacos")

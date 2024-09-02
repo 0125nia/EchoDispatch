@@ -1,9 +1,11 @@
 package com.nia.echoDispatch.handler.pending;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.nia.echoDispatch.common.domian.TaskInfo;
 import com.nia.echoDispatch.common.enums.TraceStatus;
+import com.nia.echoDispatch.handler.Deduplication.DeduplicationParam;
 import com.nia.echoDispatch.handler.Deduplication.DeduplicationService;
 import com.nia.echoDispatch.handler.handler.Handler;
 import com.nia.echoDispatch.handler.utils.EnumsUtil;
@@ -16,9 +18,7 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -84,16 +84,10 @@ public class Task implements Runnable{
      * @return
      */
     private TaskInfo deduplication(TaskInfo taskInfo){
-        String msg = JSON.toJSONString(taskInfo.getContentModel());
-        Integer sendChannel = taskInfo.getSendChannel();
-        String code = Objects.requireNonNull(EnumsUtil.getChannelTypeByCode(sendChannel)).getAbbrCode();
-        //使用流过滤处理接收者Set
-        Set<String> receivers = taskInfo.getReceiver().stream()
-                .filter(receiver -> deduplicationService.deduplication(code,receiver,msg))
-                .collect(Collectors.toSet());
-
-        //重新装配
-        taskInfo.setReceiver(receivers);
+        DeduplicationParam deduplicationParam = DeduplicationParam.builder().taskInfo(taskInfo).build();
+        deduplicationParam.setDeduplicationTime((DateUtil.endOfDay(new Date()).getTime() - DateUtil.current()) / 1000);
+        // 去重
+        deduplicationService.deduplication(deduplicationParam);
         return taskInfo;
     }
 
