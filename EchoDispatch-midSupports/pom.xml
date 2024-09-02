@@ -74,6 +74,11 @@
             <groupId>de.siegmar</groupId>
             <artifactId>logback-gelf</artifactId>
         </dependency>
+        <!--apollo-->
+        <dependency>
+            <groupId>com.ctrip.framework.apollo</groupId>
+            <artifactId>apollo-client</artifactId>
+        </dependency>
 
     </dependencies>
 

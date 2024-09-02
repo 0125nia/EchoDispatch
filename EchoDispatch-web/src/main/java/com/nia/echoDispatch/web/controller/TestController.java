@@ -7,12 +7,10 @@ import com.nia.echoDispatch.common.domian.TaskInfo;
 import com.nia.echoDispatch.common.model.impl.EmailContentModel;
 import com.nia.echoDispatch.common.enums.ChannelType;
 import com.nia.echoDispatch.common.enums.MessageType;
-import com.nia.echoDispatch.handler.Deduplication.DeduplicationParam;
-import com.nia.echoDispatch.handler.Deduplication.DeduplicationService;
 import com.nia.echoDispatch.handler.handler.impl.EmailHandler;
 import com.nia.echoDispatch.impl.service.MessageTemplateService;
 import com.nia.echoDispatch.support.domain.MessageTemplate;
-import com.nia.echoDispatch.support.service.NacosService;
+import com.nia.echoDispatch.support.service.ConfigService;
 import com.nia.echoDispatch.support.utils.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +30,7 @@ public class TestController {
     private RedisUtil redisUtil;
 
     @Autowired
-    private NacosService nacosService;
+    private ConfigService nacosService;
 
     @Autowired
     private EmailHandler emailHandler;
@@ -59,10 +57,10 @@ public class TestController {
         return s;
     }
 
-    @RequestMapping("/nacos")
-    public String nacos(){
-        return nacosService.getProperty("test");
-    }
+//    @RequestMapping("/nacos")
+//    public String nacos(){
+//        return nacosService.getProperty("test");
+//    }
 
     @RequestMapping("/mail")
     public String mail(){

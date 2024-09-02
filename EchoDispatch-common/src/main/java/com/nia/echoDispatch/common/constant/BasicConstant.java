@@ -40,6 +40,7 @@ public class BasicConstant {
      */
     public static final Long ONE_DAY_SECOND = 86400L;
 
+    public static final String EMPTY_JSON_OBJECT = "{}";
 
 
     private BasicConstant(){}

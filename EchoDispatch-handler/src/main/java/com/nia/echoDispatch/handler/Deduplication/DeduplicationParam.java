@@ -25,5 +25,12 @@ public class DeduplicationParam {
      * 去重时间
      * 单位：秒
      */
+    @JSONField(name = "time")
     private Long deduplicationTime;
+
+    /**
+     * 需达到的次数去重
+     */
+    @JSONField(name = "num")
+    private Integer countNum;
 }

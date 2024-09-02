@@ -8,6 +8,7 @@ package com.nia.echoDispatch.support.constants;
 public class PropertyConstants {
 
     public final static String NACOS = "nacos";
+    public final static String APOLLO = "apollo";
 
     public static final Long TIMEOUT = 5000L;
 }

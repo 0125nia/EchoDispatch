@@ -105,8 +105,13 @@ EchoDispatch:
     key:
       deduplication: deduplication.
   property:
-    name: nacos
+    name: apollo
     group: DEFAULT_GROUP
     data-id: ed
   data:
     path: /
+
+apollo:
+  bootstrap:
+    enabled: true
+    namespaces: boss.ed,dynamic-tp-apollo-dtp.yml

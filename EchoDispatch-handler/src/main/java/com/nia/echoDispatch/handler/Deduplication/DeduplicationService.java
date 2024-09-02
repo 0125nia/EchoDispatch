@@ -1,10 +1,13 @@
 package com.nia.echoDispatch.handler.Deduplication;
 
 import cn.hutool.core.collection.CollUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.nia.echoDispatch.common.constant.BasicConstant;
 import com.nia.echoDispatch.common.domian.TaskInfo;
 import com.nia.echoDispatch.common.domian.dto.TraceLogDTO;
 import com.nia.echoDispatch.common.enums.TraceStatus;
+import com.nia.echoDispatch.support.service.ConfigService;
 import com.nia.echoDispatch.support.utils.LogUtil;
 import com.nia.echoDispatch.support.utils.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -25,11 +28,7 @@ import java.util.Set;
 @Slf4j
 public class DeduplicationService {
 
-    @Autowired
-    private RedisUtil redisUtil;
 
-    @Value("${EchoDispatch.redis.key.deduplication}")
-    private String HEAD;
     @Autowired
     private SlideWindowDeduplicationService deduplicationService;
 

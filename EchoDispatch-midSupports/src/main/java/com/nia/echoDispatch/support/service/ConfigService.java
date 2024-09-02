@@ -5,13 +5,13 @@ package com.nia.echoDispatch.support.service;
  * @description 读取配置服务
  * @Date 2024/5/29
  */
-public interface NacosService {
+public interface ConfigService {
 
     /**
      * 获取远程配置
      * @param key
      * @return
      */
-    String getProperty(String key);
+    String getProperty(String key,String defaultValue);
 
 }

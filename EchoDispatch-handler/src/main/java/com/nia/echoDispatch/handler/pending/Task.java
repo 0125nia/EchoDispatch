@@ -3,12 +3,16 @@ package com.nia.echoDispatch.handler.pending;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.nia.echoDispatch.common.constant.BasicConstant;
 import com.nia.echoDispatch.common.domian.TaskInfo;
+import com.nia.echoDispatch.common.enums.DeduplicationType;
 import com.nia.echoDispatch.common.enums.TraceStatus;
 import com.nia.echoDispatch.handler.Deduplication.DeduplicationParam;
 import com.nia.echoDispatch.handler.Deduplication.DeduplicationService;
 import com.nia.echoDispatch.handler.handler.Handler;
 import com.nia.echoDispatch.handler.utils.EnumsUtil;
+import com.nia.echoDispatch.support.service.ConfigService;
 import com.nia.echoDispatch.support.utils.LogUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +45,12 @@ public class Task implements Runnable{
     @Qualifier("handlerMap")
     private Map<Integer,Handler> handlerMap;
 
+    @Autowired
+    private ConfigService config;
+
+    public static final String DEDUPLICATION_RULE_KEY = "deduplicationRule";
+
+    String DEDUPLICATION_CONFIG_PRE = "deduplication_";
     @Override
     public void run() {
         //去重逻辑
@@ -84,12 +94,24 @@ public class Task implements Runnable{
      * @return
      */
     private TaskInfo deduplication(TaskInfo taskInfo){
-        DeduplicationParam deduplicationParam = DeduplicationParam.builder().taskInfo(taskInfo).build();
-        deduplicationParam.setDeduplicationTime((DateUtil.endOfDay(new Date()).getTime() - DateUtil.current()) / 1000);
+        // 配置样例{"deduplication_10":{"num":1,"time":300},"deduplication_20":{"num":5}}
+        String deduplicationConfig = config.getProperty(DEDUPLICATION_RULE_KEY, BasicConstant.EMPTY_JSON_OBJECT);
+        DeduplicationParam deduplicationParam = getParamsFromConfig(DeduplicationType.CONTENT.getCode(), deduplicationConfig, taskInfo);
         // 去重
         deduplicationService.deduplication(deduplicationParam);
         return taskInfo;
     }
 
-
+    public DeduplicationParam getParamsFromConfig(Integer key, String duplicationConfig, TaskInfo taskInfo) {
+        JSONObject object = JSON.parseObject(duplicationConfig);
+        if (Objects.isNull(object)) {
+            return null;
+        }
+        DeduplicationParam deduplicationParam = JSON.parseObject(object.getString(DEDUPLICATION_CONFIG_PRE + key), DeduplicationParam.class);
+        if (Objects.isNull(deduplicationParam)) {
+            return null;
+        }
+        deduplicationParam.setTaskInfo(taskInfo);
+        return deduplicationParam;
+    }
 }
